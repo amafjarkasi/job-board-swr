@@ -1,7 +1,6 @@
 import React from "react";
 import useSWR from "swr";
 import { stripHtml } from "string-strip-html";
-import moment from "moment";
 import { Button, Card, Elevation } from "@blueprintjs/core";
 
 export default function FetchJobs() {
@@ -22,9 +21,7 @@ export default function FetchJobs() {
 									interactive={true}
 									elevation={Elevation.TWO}>
 									<h5>
-										{/* <a href={jobs.apply_url} target="_new"> */}
 										{jobs.company} | {jobs.position}
-										{/* </a> */}
 									</h5>
 									<h6>{jobs.date.substring(0, 10)}</h6>
 									<p>
