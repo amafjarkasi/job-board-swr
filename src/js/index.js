@@ -6,6 +6,10 @@ import ReactDOM from "react-dom";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import "normalize.css/normalize.css";
+import "@blueprintjs/icons/lib/css/blueprint-icons.css";
+import "@blueprintjs/core/lib/css/blueprint.css";
+
 //include your index.scss file into the bundle
 import "../styles/index.scss";
 

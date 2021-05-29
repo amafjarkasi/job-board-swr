@@ -61,10 +61,18 @@
 		]
 	},
 	"dependencies": {
+		"@blueprintjs/core": "^3.45.0",
+		"@blueprintjs/datetime": "^3.23.4",
+		"@blueprintjs/icons": "^3.26.1",
+		"@blueprintjs/select": "^3.16.4",
+		"@blueprintjs/table": "^3.8.33",
+		"@blueprintjs/timezone": "^3.9.4",
 		"@popperjs/core": "^2.9.2",
 		"axios": "^0.21.1",
 		"bootstrap": "^4.6.0",
 		"jquery": "^3.5.1",
+		"moment": "^2.29.1",
+		"normalize.css": "^8.0.1",
 		"popper.js": "^1.16.1",
 		"prop-types": "^15.6.1",
 		"query-string": "^5.1.1",

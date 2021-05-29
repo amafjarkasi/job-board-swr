@@ -1,6 +1,8 @@
 import React from "react";
 import useSWR from "swr";
 import { stripHtml } from "string-strip-html";
+import moment from "moment";
+import { Button, Card, Elevation } from "@blueprintjs/core";
 
 export default function FetchJobs() {
 	let fetcher;
@@ -12,19 +14,42 @@ export default function FetchJobs() {
 	return (
 		<>
 			{data.map((jobs, id) => {
-				return (
-					<div className="container" key={id}>
-						<h2>
-							{jobs.company !== "" ? jobs.company : ""}
-							{jobs.date}
-						</h2>
-						<p>
-							{jobs.description !== ""
-								? stripHtml(`${jobs.description}`).result
-								: ""}
-						</p>
-					</div>
-				);
+				if (id > 0)
+					if (jobs.position)
+						return (
+							<div className="container" key={id}>
+								<Card
+									interactive={true}
+									elevation={Elevation.TWO}>
+									<h5>
+										{/* <a href={jobs.apply_url} target="_new"> */}
+										{jobs.company} | {jobs.position}
+										{/* </a> */}
+									</h5>
+									<h6>{jobs.date.substring(0, 10)}</h6>
+									<p>
+										<span className="bp3-tag .bp3-round">
+											{jobs.tags[0] != ""
+												? jobs.tags[0]
+												: ""}
+										</span>
+									</p>
+									<p>
+										{stripHtml(
+											`${jobs.description}`
+										).result.slice(0, 200)}
+									</p>
+									<br />
+									<a href={jobs.apply_url} target="_new">
+										<Button
+											rightIcon="arrow-right"
+											intent="success">
+											View job
+										</Button>
+									</a>
+								</Card>
+							</div>
+						);
 			})}
 		</>
 	);

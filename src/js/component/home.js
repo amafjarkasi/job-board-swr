@@ -7,17 +7,8 @@ export function Home() {
 	return (
 		<>
 			<Topbar />
-			<div className="text-center mt-5">
+			<div className="text-center container-fluid centered mt-5 w-75">
 				<FetchJobs />
-				{/* <h1>Hello Rigo!</h1>
-				<a href="#" className="btn btn-success">
-					If you see this green button... bootstrap is working
-				</a>
-				<p>
-					Made by{" "}
-					<a href="http://www.4geeksacademy.com">4Geeks Academy</a>,
-					with love!
-				</p> */}
 			</div>
 		</>
 	);
