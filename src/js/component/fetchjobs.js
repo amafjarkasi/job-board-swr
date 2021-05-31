@@ -6,19 +6,17 @@ import { Button, Card, Elevation } from "@blueprintjs/core";
 export default function FetchJobs() {
 	let fetcher;
 	const [searchTag, setSearchTag] = useState("");
-	const [hideResults, setResults] = useState(true);
-	const { data, error } = useSWR("https://remoteok.io/api", fetcher);
+	const [addTags, setTags] = useState("");
+	const { data, error } = useSWR(
+		`https://remoteok.io/api?tag=${addTags}`,
+		fetcher
+	);
 
 	if (error) return <div>Failed to load</div>;
 	if (!data) return <div>Loading...</div>;
 
-	// function handleClick(e) {
-	// 	console.log(e);
-	// }
-
 	function filterTag(e) {
-		console.log(e);
-		setResults(true);
+		searchTag != "" && setTags(searchTag);
 	}
 
 	function RenderImage(url) {
@@ -69,7 +67,6 @@ export default function FetchJobs() {
 						className="bp3-button bp3-intent-success bp3-icon-search mr-1"
 						onClick={e => {
 							filterTag(searchTag);
-							setResults(true);
 						}}
 					/>
 					<button
@@ -77,11 +74,11 @@ export default function FetchJobs() {
 						className="bp3-button bp3-intent-danger bp3-icon-trash"
 						onClick={e => {
 							setSearchTag("");
-							setResults(false);
+							setTags("");
 						}}
 					/>
 				</div>
-				{/* jobs.tags.includes(searchTag) */}
+
 				{data.map((jobs, id) => {
 					if (id > 0)
 						if (jobs.position)
