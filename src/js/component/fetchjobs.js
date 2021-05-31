@@ -2,7 +2,6 @@ import React from "react";
 import useSWR from "swr";
 import { stripHtml } from "string-strip-html";
 import { Button, Card, Elevation } from "@blueprintjs/core";
-import { propTypes } from "react-bootstrap/esm/Image";
 
 export default function FetchJobs() {
 	let fetcher;
