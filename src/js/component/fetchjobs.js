@@ -78,7 +78,7 @@ export default function FetchJobs() {
 						}}
 					/>
 				</div>
-
+				<p className="pb-2">Results: {data.length - 1}</p>
 				{data.map((jobs, id) => {
 					if (id > 0)
 						if (jobs.position)
