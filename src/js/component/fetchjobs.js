@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import useSWR from "swr";
 import { stripHtml } from "string-strip-html";
 import { Button, Card, Elevation } from "@blueprintjs/core";
 
 export default function FetchJobs() {
 	let fetcher;
+	const [searchTag, setSearchTag] = useState("");
+	const [hideResults, setResults] = useState(true);
 	const { data, error } = useSWR("https://remoteok.io/api", fetcher);
 
 	if (error) return <div>Failed to load</div>;
 	if (!data) return <div>Loading...</div>;
+
+	// function handleClick(e) {
+	// 	console.log(e);
+	// }
+
+	function filterTag(e) {
+		console.log(e);
+		setResults(true);
+	}
 
 	function RenderImage(url) {
 		return (
@@ -28,9 +39,14 @@ export default function FetchJobs() {
 		return tags.alltags.map(tagName => {
 			counter++;
 			return (
-				<span className="bp3-tag .bp3-round mr-1 mb-1" key={counter}>
-					{tagName}
-				</span>
+				<a
+					role="button"
+					onClick={e => setSearchTag(tagName)}
+					key={counter}>
+					<span className="bp3-tag .bp3-round mr-1 mb-1">
+						{tagName}
+					</span>
+				</a>
 			);
 		});
 	}
@@ -38,42 +54,75 @@ export default function FetchJobs() {
 	return (
 		<>
 			<div className="container">
+				<div className="d-inline-flex mb-4">
+					<input
+						type="text"
+						className="bp3-input mr-2"
+						placeholder="Search job tags..."
+						onChange={e => setSearchTag(e.target.value)}
+						value={searchTag}
+					/>
+				</div>
+				<div className="bp3-button-group">
+					<button
+						type="button"
+						className="bp3-button bp3-intent-success bp3-icon-search mr-1"
+						onClick={e => {
+							filterTag(searchTag);
+							setResults(true);
+						}}
+					/>
+					<button
+						type="button"
+						className="bp3-button bp3-intent-danger bp3-icon-trash"
+						onClick={e => {
+							setSearchTag("");
+							setResults(false);
+						}}
+					/>
+				</div>
+				{/* jobs.tags.includes(searchTag) */}
 				{data.map((jobs, id) => {
 					if (id > 0)
 						if (jobs.position)
 							return (
-								<Card
-									className="mb-3"
-									interactive={true}
-									key={id}
-									elevation={Elevation.TWO}>
-									{jobs.company_logo != "" && (
-										<RenderImage logo={jobs.company_logo} />
-									)}
-
-									<h5>
-										{jobs.company} | {jobs.position}
-									</h5>
-									<h6>{jobs.date.substring(0, 10)}</h6>
-									<p>
-										{jobs.tags[0] != "" && (
-											<RenderTags alltags={jobs.tags} />
+								<div key={id}>
+									<Card
+										className="mb-3"
+										interactive={true}
+										elevation={Elevation.TWO}>
+										{jobs.company_logo != "" && (
+											<RenderImage
+												logo={jobs.company_logo}
+											/>
 										)}
-									</p>
-									<p>
-										{stripHtml(
-											`${jobs.description}`
-										).result.slice(0, 200)}
-									</p>
-									<br />
-									<a href={jobs.apply_url} target="_new">
-										<Button
-											rightIcon="arrow-right"
-											intent="success">
-											View job
-										</Button>
-									</a>
-								</Card>
+
+										<h5>
+											{jobs.company} | {jobs.position}
+										</h5>
+										<h6>{jobs.date.substring(0, 10)}</h6>
+										<p>
+											{jobs.tags.length != 0 && (
+												<RenderTags
+													alltags={jobs.tags}
+												/>
+											)}
+										</p>
+										<p>
+											{stripHtml(
+												`${jobs.description}`
+											).result.slice(0, 200)}
+										</p>
+										<br />
+										<a href={jobs.apply_url} target="_new">
+											<Button
+												rightIcon="arrow-right"
+												intent="success">
+												View job
+											</Button>
+										</a>
+									</Card>
+								</div>
 							);
 				})}
 			</div>
