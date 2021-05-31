@@ -57,12 +57,6 @@ export default function FetchJobs() {
 										{jobs.tags[0] != "" && (
 											<RenderTags url={jobs.tags} />
 										)}
-
-										{/* <span className="bp3-tag .bp3-round">
-											{jobs.tags[0] != ""
-												? jobs.tags[0]
-												: ""}
-										</span> */}
 									</p>
 									<p>
 										{stripHtml(
