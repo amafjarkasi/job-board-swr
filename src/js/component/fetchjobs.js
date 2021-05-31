@@ -81,7 +81,7 @@ export default function FetchJobs() {
 				<p className="pb-2">Results: {data.length - 1}</p>
 				{data.map((jobs, id) => {
 					if (id > 0)
-						if (jobs.position)
+						if (jobs.position && jobs.company)
 							return (
 								<div key={id}>
 									<Card
