@@ -18,6 +18,7 @@ export default function FetchJobs() {
 				className="rounded mx-auto d-block pb-2"
 				width="50px"
 				length="50px"
+				alt=""
 			/>
 		);
 	}
@@ -25,7 +26,7 @@ export default function FetchJobs() {
 	function RenderTags(tags) {
 		let counter = 0;
 
-		return tags.url.map(tagName => {
+		return tags.alltags.map(tagName => {
 			counter++;
 			return (
 				<span className="bp3-tag .bp3-round mr-1 mb-1" key={counter}>
@@ -37,13 +38,15 @@ export default function FetchJobs() {
 
 	return (
 		<>
-			{data.map((jobs, id) => {
-				if (id > 0)
-					if (jobs.position)
-						return (
-							<div className="container" key={id}>
+			<div className="container">
+				{data.map((jobs, id) => {
+					if (id > 0)
+						if (jobs.position)
+							return (
 								<Card
+									className="mb-3"
 									interactive={true}
+									key={id}
 									elevation={Elevation.TWO}>
 									{jobs.company_logo != "" && (
 										<RenderImage logo={jobs.company_logo} />
@@ -55,7 +58,7 @@ export default function FetchJobs() {
 									<h6>{jobs.date.substring(0, 10)}</h6>
 									<p>
 										{jobs.tags[0] != "" && (
-											<RenderTags url={jobs.tags} />
+											<RenderTags alltags={jobs.tags} />
 										)}
 									</p>
 									<p>
@@ -72,9 +75,9 @@ export default function FetchJobs() {
 										</Button>
 									</a>
 								</Card>
-							</div>
-						);
-			})}
+							);
+				})}
+			</div>
 		</>
 	);
 }
