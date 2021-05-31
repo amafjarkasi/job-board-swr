@@ -11,7 +11,7 @@
 		"build": "webpack --mode development",
 		"deploy:github": "node deploy-to-github.js"
 	},
-	"author": "Alejandro Sanchez",
+	"author": "Amaf Jarkasi",
 	"license": "ISC",
 	"devDependencies": {
 		"@babel/cli": "^7.12.13",
