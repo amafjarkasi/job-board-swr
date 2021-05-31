@@ -2,6 +2,7 @@ import React from "react";
 import useSWR from "swr";
 import { stripHtml } from "string-strip-html";
 import { Button, Card, Elevation } from "@blueprintjs/core";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 export default function FetchJobs() {
 	let fetcher;
@@ -9,6 +10,30 @@ export default function FetchJobs() {
 
 	if (error) return <div>Failed to load</div>;
 	if (!data) return <div>Loading...</div>;
+
+	function RenderImage(url) {
+		return (
+			<img
+				src={url.logo}
+				className="rounded mx-auto d-block pb-2"
+				width="50px"
+				length="50px"
+			/>
+		);
+	}
+
+	function RenderTags(tags) {
+		let counter = 0;
+
+		return tags.url.map(tagName => {
+			counter++;
+			return (
+				<span className="bp3-tag .bp3-round mr-1 mb-1" key={counter}>
+					{tagName}
+				</span>
+			);
+		});
+	}
 
 	return (
 		<>
@@ -20,16 +45,24 @@ export default function FetchJobs() {
 								<Card
 									interactive={true}
 									elevation={Elevation.TWO}>
+									{jobs.company_logo != "" && (
+										<RenderImage logo={jobs.company_logo} />
+									)}
+
 									<h5>
 										{jobs.company} | {jobs.position}
 									</h5>
 									<h6>{jobs.date.substring(0, 10)}</h6>
 									<p>
-										<span className="bp3-tag .bp3-round">
+										{jobs.tags[0] != "" && (
+											<RenderTags url={jobs.tags} />
+										)}
+
+										{/* <span className="bp3-tag .bp3-round">
 											{jobs.tags[0] != ""
 												? jobs.tags[0]
 												: ""}
-										</span>
+										</span> */}
 									</p>
 									<p>
 										{stripHtml(
