@@ -2,10 +2,22 @@ import React, { useState } from "react";
 import useSWR from "swr";
 import { stripHtml } from "string-strip-html";
 import { Button, Card, Elevation } from "@blueprintjs/core";
+import { OverlayTrigger, Tooltip, Overlay } from "react-bootstrap";
+import { Notyf } from "notyf";
+import "notyf/notyf.min.css";
 
 export default function FetchJobs() {
 	let fetcher;
+	const notyf = new Notyf({
+		position: {
+			x: "right",
+			y: "top"
+		},
+		ripple: "true"
+	});
 	const [searchTag, setSearchTag] = useState("");
+	const [show, setShow] = useState(false);
+
 	const [addTags, setTags] = useState("");
 	const { data, error } = useSWR(
 		`https://remoteok.io/api?tag=${addTags}`,
@@ -17,6 +29,12 @@ export default function FetchJobs() {
 
 	function filterTag(e) {
 		searchTag != "" && setTags(searchTag);
+	}
+
+	function setToast(tagName, content) {
+		setSearchTag(tagName);
+		notyf.success(content);
+		return true;
 	}
 
 	function RenderImage(url) {
@@ -31,23 +49,60 @@ export default function FetchJobs() {
 		);
 	}
 
+	const renderTooltip = props => (
+		<Tooltip id="button-tooltip" {...props}>
+			Click tag for refining search
+		</Tooltip>
+	);
+
 	function RenderTags(tags) {
 		let counter = 0;
 
 		return tags.alltags.map(tagName => {
 			counter++;
 			return (
-				<a
-					role="button"
-					onClick={e => setSearchTag(tagName)}
-					key={counter}>
-					<span className="bp3-tag .bp3-round mr-1 mb-1">
-						{tagName}
-					</span>
-				</a>
+				<>
+					{/* setSearchTag(tagName) */}
+					<OverlayTrigger
+						placement="top"
+						delay={{ show: 250, hide: 400 }}
+						overlay={renderTooltip}
+						key={counter}>
+						<a
+							role="button"
+							onClick={e =>
+								setToast(
+									tagName,
+									"Selected tag added to search bar"
+								)
+							}>
+							<span className="bp3-tag .bp3-round mr-1 mb-1">
+								{tagName}
+							</span>
+						</a>
+					</OverlayTrigger>
+				</>
 			);
 		});
 	}
+
+	// function ToastNew() {
+	// 	return (
+	// 		<Toast
+	// 			onClose={() => setShow(false)}
+	// 			show={show}
+	// 			delay={3000}
+	// 			autohide>
+	// 			<Toast.Header>
+	// 				<strong className="mr-auto">Bootstrap</strong>
+	// 				<small>11 mins ago</small>
+	// 			</Toast.Header>
+	// 			<Toast.Body>
+	// 				Woohoo, good reading this text in a Toast!
+	// 			</Toast.Body>
+	// 		</Toast>
+	// 	);
+	// }
 
 	return (
 		<>
@@ -87,6 +142,7 @@ export default function FetchJobs() {
 									<Card
 										className="mb-3"
 										interactive={true}
+										key={id++}
 										elevation={Elevation.TWO}>
 										{jobs.company_logo != "" && (
 											<RenderImage
