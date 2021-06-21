@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useSWR from "swr";
 import { stripHtml } from "string-strip-html";
 import { Button, Card, Elevation } from "@blueprintjs/core";
-import { OverlayTrigger, Tooltip, Overlay } from "react-bootstrap";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
 
@@ -18,7 +18,7 @@ export default function FetchJobs() {
 		dismissible: "true"
 	});
 	const [searchTag, setSearchTag] = useState("");
-	const [show, setShow] = useState(false);
+	const [getLimits, setLimits] = useState(false);
 
 	const [addTags, setTags] = useState("");
 	const { data, error } = useSWR(
@@ -57,6 +57,10 @@ export default function FetchJobs() {
 		</Tooltip>
 	);
 
+	function handlePeriodChange(selVal) {
+		setLimits(selVal);
+	}
+
 	function RenderTags(tags) {
 		let counter = 0;
 
@@ -91,7 +95,7 @@ export default function FetchJobs() {
 	return (
 		<>
 			<div className="container">
-				<div className="d-inline-flex mb-4">
+				<div className="d-inline-flex mb-3">
 					<input
 						type="text"
 						className="bp3-input mr-2"
@@ -99,8 +103,23 @@ export default function FetchJobs() {
 						onChange={e => setSearchTag(e.target.value)}
 						value={searchTag}
 					/>
+					<div className="bp3-select">
+						<select
+							onChange={val =>
+								handlePeriodChange(val.target.value)
+							}>
+							<option value="0" selected>
+								Display results...
+							</option>
+							<option value="25">25</option>
+							<option value="50">50</option>
+							<option value="75">75</option>
+							<option value="0">All</option>
+						</select>
+					</div>
 				</div>
-				<div className="bp3-button-group">
+				<br />
+				<div classNameName="bp3-button-group">
 					<button
 						type="button"
 						className="bp3-button bp3-intent-success bp3-icon-search mr-1"
@@ -117,7 +136,8 @@ export default function FetchJobs() {
 						}}
 					/>
 				</div>
-				<p className="pb-2">Results: {data.length - 1}</p>
+				<br />
+				<p className="py-2">Results: {data.length - 1}</p>
 				{data.map((jobs, id) => {
 					if (id > 0)
 						if (jobs.position && jobs.company)
