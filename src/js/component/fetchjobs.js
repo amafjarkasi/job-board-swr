@@ -103,11 +103,12 @@ export default function FetchJobs() {
 						onChange={e => setSearchTag(e.target.value)}
 						value={searchTag}
 					/>
-					<div className="bp3-select">
+					<div className="bp3-select mr-2">
 						<select
 							onChange={val =>
 								handlePeriodChange(val.target.value)
-							}>
+							}
+							disabled>
 							<option value="0" selected>
 								Display results...
 							</option>
@@ -117,25 +118,28 @@ export default function FetchJobs() {
 							<option value="0">All</option>
 						</select>
 					</div>
+					<div classNameName="bp3-button-group">
+						<button
+							type="button"
+							className="bp3-button bp3-intent-success bp3-icon-search mr-2"
+							onClick={e => {
+								filterTag(searchTag);
+							}}>
+							Search
+						</button>
+						<button
+							type="button"
+							className="bp3-button bp3-intent-danger bp3-icon-trash"
+							onClick={e => {
+								setSearchTag("");
+								setTags("");
+							}}>
+							Clear
+						</button>
+					</div>
 				</div>
 				<br />
-				<div classNameName="bp3-button-group">
-					<button
-						type="button"
-						className="bp3-button bp3-intent-success bp3-icon-search mr-1"
-						onClick={e => {
-							filterTag(searchTag);
-						}}
-					/>
-					<button
-						type="button"
-						className="bp3-button bp3-intent-danger bp3-icon-trash"
-						onClick={e => {
-							setSearchTag("");
-							setTags("");
-						}}
-					/>
-				</div>
+
 				<br />
 				<p className="py-2">Results: {data.length - 1}</p>
 				{data.map((jobs, id) => {
