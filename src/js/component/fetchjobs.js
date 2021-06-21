@@ -100,7 +100,7 @@ export default function FetchJobs() {
 	return (
 		<>
 			<div className="container">
-				<ScrollToTop smooth color="#0d8050" />
+				<ScrollToTop smooth color="#c23030" />
 				<div className="d-inline-flex mb-3">
 					<input
 						type="text"
