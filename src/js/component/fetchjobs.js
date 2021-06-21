@@ -67,7 +67,7 @@ export default function FetchJobs() {
 						placement="top"
 						delay={{ show: 250, hide: 400 }}
 						overlay={renderTooltip}
-						key={counter}>
+						key={counter * 2}>
 						<a
 							role="button"
 							onClick={e =>
@@ -85,24 +85,6 @@ export default function FetchJobs() {
 			);
 		});
 	}
-
-	// function ToastNew() {
-	// 	return (
-	// 		<Toast
-	// 			onClose={() => setShow(false)}
-	// 			show={show}
-	// 			delay={3000}
-	// 			autohide>
-	// 			<Toast.Header>
-	// 				<strong className="mr-auto">Bootstrap</strong>
-	// 				<small>11 mins ago</small>
-	// 			</Toast.Header>
-	// 			<Toast.Body>
-	// 				Woohoo, good reading this text in a Toast!
-	// 			</Toast.Body>
-	// 		</Toast>
-	// 	);
-	// }
 
 	return (
 		<>

@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 export default function Topbar() {
 	return (
 		<>
-			<Navbar bg="dark" variant="dark" sticky="top">
+			<Navbar bg="secondary" variant="dark" sticky="top">
 				<Navbar.Brand>
 					Remote Job Aggregator - React Project
 				</Navbar.Brand>
