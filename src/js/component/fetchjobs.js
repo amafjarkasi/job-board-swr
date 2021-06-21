@@ -9,7 +9,7 @@ import "notyf/notyf.min.css";
 export default function FetchJobs() {
 	let fetcher;
 	const notyf = new Notyf({
-		duration: 3000,
+		duration: 3500,
 		position: {
 			x: "right",
 			y: "top"
@@ -35,7 +35,11 @@ export default function FetchJobs() {
 
 	function setToast(tagName, content) {
 		setSearchTag(tagName);
-		notyf.success(content);
+		tagName != ""
+			? notyf.success(
+					`Selected '${tagName}' tag has been added to search`
+			  )
+			: notyf.success(content);
 		return true;
 	}
 
@@ -53,7 +57,7 @@ export default function FetchJobs() {
 
 	const renderTooltip = props => (
 		<Tooltip id="button-tooltip" {...props}>
-			Click tag for refining search
+			Click tag to refine search
 		</Tooltip>
 	);
 
