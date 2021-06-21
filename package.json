@@ -82,6 +82,7 @@
 		"react-dom": "^16.14.0",
 		"react-polyfills": "0.0.1",
 		"react-query": "^3.16.0",
+		"react-scroll-to-top": "^1.0.5",
 		"string-strip-html": "^8.2.13",
 		"swr": "^0.5.6"
 	}

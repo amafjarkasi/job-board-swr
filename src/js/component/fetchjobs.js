@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { stripHtml } from "string-strip-html";
 import { Button, Card, Elevation } from "@blueprintjs/core";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import ScrollToTop from "react-scroll-to-top";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
 
@@ -99,6 +100,7 @@ export default function FetchJobs() {
 	return (
 		<>
 			<div className="container">
+				<ScrollToTop smooth color="#0d8050" />
 				<div className="d-inline-flex mb-3">
 					<input
 						type="text"
