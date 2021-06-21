@@ -75,7 +75,7 @@ export default function FetchJobs() {
 							onClick={e =>
 								setToast(
 									tagName,
-									"Selected tag added to search bar"
+									"Selected tag has been added to search bar"
 								)
 							}>
 							<span className="bp3-tag .bp3-round mr-1 mb-1">
