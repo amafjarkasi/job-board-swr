@@ -9,11 +9,13 @@ import "notyf/notyf.min.css";
 export default function FetchJobs() {
 	let fetcher;
 	const notyf = new Notyf({
+		duration: 3000,
 		position: {
 			x: "right",
 			y: "top"
 		},
-		ripple: "true"
+		ripple: "true",
+		dismissible: "true"
 	});
 	const [searchTag, setSearchTag] = useState("");
 	const [show, setShow] = useState(false);
