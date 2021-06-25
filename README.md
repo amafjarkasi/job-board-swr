@@ -1,7 +1,7 @@
 # 👔 Remote Job Aggregator - React SWR
 
 ### Summary:
-<p align="center">Remote job aggregator uses an external API to fetch (SWR) the latest job offerings within the past 24 hours. This is one of the most comprehensive lists available to browse through remote job opportunities. It links directly to the job posting and allows you to filter through searches based on available tags. The application was coded in React, JavaScript, Blueprint UI and HTML/CSS.</p>
+<p align="center">Remote job aggregator uses an external API to fetch (SWR) the latest job offerings within the past 24 hours. This is one of the most comprehensive lists available to browse through remote job opportunities. It links directly to the job posting and allows you to filter through searches based on available tags. The application was coded in React, JavaScript, Blueprint UI toolkit and HTML/CSS.</p>
 
 ### Screencasts:
 <p align="center">
