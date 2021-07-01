@@ -185,7 +185,7 @@ export default function FetchJobs() {
 											<Button
 												rightIcon="arrow-right"
 												intent="success">
-												View job
+												Apply for job
 											</Button>
 										</a>
 									</Card>
