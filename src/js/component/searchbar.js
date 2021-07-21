@@ -5,7 +5,7 @@ export default function SearchBar() {
 	const [searchTag, setSearchTag] = useState("");
 
 	function handleClick(e) {
-		console.log(e);
+		// console.log(e);
 	}
 
 	// function searchTag(e) {}
