@@ -6,9 +6,7 @@ export default function Topbar() {
 	return (
 		<>
 			<Navbar bg="secondary" variant="dark" sticky="top">
-				<Navbar.Brand>
-					Remote Job Aggregator - React Project
-				</Navbar.Brand>
+				<Navbar.Brand>Remote Job Aggregator</Navbar.Brand>
 			</Navbar>
 		</>
 	);
